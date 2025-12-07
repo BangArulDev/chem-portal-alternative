@@ -170,10 +170,10 @@ async def get_results_file(filename: str):
 def get_frontend_config(request: Request):
     """
     Returns the backend URL configuration for the frontend.
-    When hosted on the same server, backendUrl is the base URL of this request.
+    When hosted on the same server, we return an empty string to force relative paths.
+    This avoids Mixed Content errors (Client is HTTPS, but Server sees HTTP behind proxy).
     """
-    base_url = str(request.base_url).rstrip("/")
-    return {"backendUrl": base_url}
+    return {"backendUrl": ""}
 
 @app.get("/register")
 async def serve_register_page():
