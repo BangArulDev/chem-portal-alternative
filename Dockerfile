@@ -7,6 +7,14 @@ WORKDIR /app
 # Copy requirements file first to leverage Docker cache
 COPY requirements.txt .
 
+# Install system dependencies required by RDKit
+RUN apt-get update && apt-get install -y \
+    libxrender1 \
+    libxext6 \
+    libsm6 \
+    libgl1 && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install dependencies including uvicorn
 # Update pip to ensure we can install packages properly
 RUN pip install --no-cache-dir --upgrade pip && \
