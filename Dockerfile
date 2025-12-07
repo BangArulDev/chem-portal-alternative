@@ -24,7 +24,12 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Create a non-root user to run the app (Recommended for security)
+# Create a non-root user to run the app (Recommended for security)
 RUN useradd -m -u 1000 user
+
+# Change ownership of the application directory to the non-root user
+RUN chown -R user:user /app
+
 USER user
 
 # Set environment variables
