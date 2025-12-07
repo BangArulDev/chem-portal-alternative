@@ -1,0 +1,12 @@
+pandas
+scikit-learn
+rdkit
+google-genai
+python-dotenv 
+fastapi
+uvicorn[standard]
+joblib
+numpy
+passlib[argon2]
+python-jose[cryptography]
+python-multipart

@@ -1,0 +1,16 @@
+{
+  "name": "chem_portal_ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "backend": "cd .. && python -m uvicorn src.api_service:app --reload"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Chemical Discovery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Montserrat:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        margin: 0;
+        max-width: 400px;
+        width: 100%;
+      }
+      .auth-card {
+        text-align: center;
+      }
+      .auth-logo {
+        font-size: 50px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 10px var(--primary-neon));
+      }
+      .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .link {
+        font-size: 0.9em;
+        color: var(--text-muted);
+        margin-top: 15px;
+      }
+      .link a {
+        color: var(--primary-neon);
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div class="card auth-card">
+        <div class="auth-logo">⚗️</div>
+        <h2>Member Login</h2>
+
+        <form id="login-form">
+          <div class="form-grid">
+            <div>
+              <input
+                id="username"
+                type="text"
+                placeholder="Username"
+                required
+                autocomplete="username"
+              />
+            </div>
+            <div>
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+          </div>
+
+          <div class="action">
+            <button id="btn-login" type="submit">Unlock Portal</button>
+          </div>
+        </form>
+
+        <div class="link">
+          New Scientist? <a href="register.html">Register Here</a>
+        </div>
+        <div
+          id="error-msg"
+          style="color: #ff6b6b; margin-top: 15px; display: none"
+        ></div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+      // Inline script for login specific logic
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-login");
+          const originalText = btn.innerText;
+          btn.innerText = "Authenticating...";
+          btn.disabled = true;
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const errorMsg = document.getElementById("error-msg");
+
+          try {
+            const token = await login(username, password);
+            if (token) {
+              window.location.href = "/";
+            }
+          } catch (err) {
+            errorMsg.innerText = err.message || "Login failed";
+            errorMsg.style.display = "block";
+          } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>

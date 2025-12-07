@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - Chemical Discovery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Montserrat:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        margin: 0;
+        max-width: 400px;
+        width: 100%;
+      }
+      .auth-card {
+        text-align: center;
+      }
+      .auth-logo {
+        font-size: 50px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 10px var(--secondary-neon));
+      }
+      .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .link {
+        font-size: 0.9em;
+        color: var(--text-muted);
+        margin-top: 15px;
+      }
+      .link a {
+        color: var(--primary-neon);
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div class="card auth-card">
+        <div class="auth-logo">🧪</div>
+        <h2>New Access</h2>
+
+        <form id="register-form">
+          <div class="form-grid">
+            <div>
+              <input
+                id="username"
+                type="text"
+                placeholder="Username"
+                required
+                autocomplete="username"
+              />
+            </div>
+            <div>
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                required
+                autocomplete="new-password"
+              />
+            </div>
+            <div>
+              <input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+                required
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+
+          <div class="action">
+            <button id="btn-register" type="submit">Grant Access</button>
+          </div>
+        </form>
+
+        <div class="link">
+          Already have access? <a href="login.html">Login Here</a>
+        </div>
+        <div
+          id="error-msg"
+          style="color: #ff6b6b; margin-top: 15px; display: none"
+        ></div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btn-register");
+          const originalText = btn.innerText;
+          btn.innerText = "Registering...";
+          btn.disabled = true;
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+          const errorMsg = document.getElementById("error-msg");
+
+          errorMsg.style.display = "none";
+
+          if (password !== confirmPassword) {
+            errorMsg.innerText = "Passwords do not match!";
+            errorMsg.style.display = "block";
+            btn.innerText = originalText;
+            btn.disabled = false;
+            return;
+          }
+
+          try {
+            const success = await register(username, password);
+            if (success) {
+              alert("Registration successful! Please login.");
+              window.location.href = "login.html";
+            }
+          } catch (err) {
+            errorMsg.innerText = err.message || "Registration failed";
+            errorMsg.style.display = "block";
+          } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>

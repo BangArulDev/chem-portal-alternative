@@ -1,0 +1,31 @@
+# environment.yml
+
+name: chem_portal_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Framework & Tools (Wajib di Conda untuk stabilitas)
+  - python=3.10
+  - uvicorn 
+  - fastapi
+  - pydantic
+  - requests
+  - streamlit
+  - click
+  - tornado 
+  - tenacity
+
+  # Sains & ML
+  - pandas
+  - numpy
+  - scikit-learn
+  - joblib
+  - rdkit
+  - pyarrow
+
+  # Instalasi dari Pip (untuk google-genai)
+  - pip
+  - pip:
+      - google-genai
+      - python-dotenv 
