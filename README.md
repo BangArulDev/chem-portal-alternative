@@ -1,3 +1,13 @@
+---
+title: Chem Portal Alternative
+emoji: ⚗️
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 (rdkit-env) D:\chem_portal>python src/model_training.py
 Mulai pelatihan model Random Forest...
 
@@ -13,10 +23,10 @@ Target RotatableBonds: R2=0.9363, RMSE=0.9872
 Model ML disimpan: src/chemical_predictor_model_rf.pkl
 Database Lookup disimpan: src/chemical_database_for_lookup.pkl
 
-recommended_compound.Properties	Random Forest (ML)	Pastikan nilai MolWeight, LogP, dan TPSA memiliki nilai yang logis (misalnya, LogP harus tinggi jika Solubility input sangat rendah).
-recommended_compound.SMILES	KNN Lookup	Pastikan ini adalah string SMILES yang valid dan sesuai dengan properti prediksi.
-justification_ai	Gemini API (Agentic AI)	Pastikan ini adalah teks naratif yang masuk akal yang menjelaskan korelasi antara SMILES, properti yang diprediksi, dan kriteria input Anda.
-Structure_2D_Path & Structure_3D_Path	RDKit (utils.py)	Cek path ini. File gambar (.png) dan koordinat 3D (.mol) seharusnya telah dibuat di folder results/ proyek Anda.
+recommended_compound.Properties Random Forest (ML) Pastikan nilai MolWeight, LogP, dan TPSA memiliki nilai yang logis (misalnya, LogP harus tinggi jika Solubility input sangat rendah).
+recommended_compound.SMILES KNN Lookup Pastikan ini adalah string SMILES yang valid dan sesuai dengan properti prediksi.
+justification_ai Gemini API (Agentic AI) Pastikan ini adalah teks naratif yang masuk akal yang menjelaskan korelasi antara SMILES, properti yang diprediksi, dan kriteria input Anda.
+Structure_2D_Path & Structure_3D_Path RDKit (utils.py) Cek path ini. File gambar (.png) dan koordinat 3D (.mol) seharusnya telah dibuat di folder results/ proyek Anda.
 
 Method,Endpoint,Fungsi Utama,Output
 GET,/,"Root Health Check. Memeriksa apakah server berjalan dan komponen inti (ML Model, Gemini Client) dimuat.",JSON Status (OK atau Service Degraded).
