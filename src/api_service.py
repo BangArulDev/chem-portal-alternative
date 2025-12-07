@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -159,3 +160,28 @@ async def get_results_file(filename: str):
         media_type = "application/octet-stream"
 
     return FileResponse(file_path, media_type=media_type)
+
+# ==============================================================================
+# 4. 🖥️ FRONTEND SERVING (All-in-One Deployment)
+# ==============================================================================
+
+@app.get("/config")
+def get_frontend_config(request: Request):
+    """
+    Returns the backend URL configuration for the frontend.
+    When hosted on the same server, backendUrl is the base URL of this request.
+    """
+    base_url = str(request.base_url).rstrip("/")
+    return {"backendUrl": base_url}
+
+@app.get("/register")
+async def serve_register_page():
+    return FileResponse("frontend_js/public/register.html")
+
+@app.get("/login")
+async def serve_login_page():
+    return FileResponse("frontend_js/public/login.html")
+
+# Mount public directory for static files (css, js) and index.html
+# This must be the LAST route defined to avoid overriding other paths
+app.mount("/", StaticFiles(directory="frontend_js/public", html=True), name="public")
