@@ -72,7 +72,8 @@ class DiscoveryResponse(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"status": "ok", "message": "Chemical Discovery Agent API is running."}
+    # Return index.html for the root URL so the frontend loads immediately
+    return FileResponse("frontend_js/public/index.html")
 
 @app.post("/register")
 def register(user: auth.UserRegister):
