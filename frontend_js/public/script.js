@@ -111,7 +111,7 @@ async function handleDiscover() {
   const originalText = btn.innerText;
 
   // UI Loading State
-  btn.innerText = "⏳ Sedang Menganalisis...";
+  btn.innerText = "SEDANG MENGANALISIS...";
   btn.disabled = true;
   document.getElementById("res-name").innerText = "...";
   document.getElementById("res-smiles").innerText = "...";
