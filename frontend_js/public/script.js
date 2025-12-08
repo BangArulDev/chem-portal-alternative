@@ -168,7 +168,7 @@ function updateUI(data) {
   document.getElementById("res-name").innerText =
     props.IUPAC || "Tidak diketahui";
   document.getElementById("res-smiles").innerText = cmp.SMILES;
-  document.getElementById("res-status").innerText = "✅ Validated by AI";
+  document.getElementById("res-status").innerText = "✅ Berhasil";
 
   // 2. Properti
   const propText = `
