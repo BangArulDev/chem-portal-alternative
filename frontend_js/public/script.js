@@ -86,6 +86,7 @@ async function init() {
     const config = await configRes.json();
     BACKEND_URL = config.backendUrl;
     console.log("Backend URL set to:", BACKEND_URL);
+    console.log("UI Refreshed version");
 
     // 2. Cek apakah di halaman auth atau main app
     checkAuthProtection();
